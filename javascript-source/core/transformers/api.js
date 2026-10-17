@@ -129,10 +129,22 @@
         });
     }
 
+    /*
+     * @function encodeJson
+     *
+     * @param {string} str a value placed in a JSON body
+     * @returns {string} str escaped for use inside a JSON string
+     */
     function encodeJson(str) {
         return JSON.stringify(str).slice(1, -1);
     }
 
+    /*
+     * @function encodeHeader
+     *
+     * @param {string} str a value placed in a header
+     * @returns {string} str without line breaks
+     */
     function encodeHeader(str) {
         return str.replace(/[\r\n]/g, '');
     }
@@ -188,9 +200,9 @@
      */
     function findReply(replies, conditions) {
         for (let i = 0; i < conditions.length; i++) {
-            for (let b = 0; b < replies.length; b++) {
-                if (replies[b].conditions.includes(conditions[i])) {
-                    return replies[b];
+            for (let j = 0; j < replies.length; j++) {
+                if (replies[j].conditions.includes(conditions[i])) {
+                    return replies[j];
                 }
             }
         }
@@ -236,12 +248,12 @@
      * @notes in a reply, `{field}` is replaced with that field of the JSON response, such as `{location.name}` or `{items.0.name}`; a missing field is left blank. `$status` is replaced with the HTTP status code, or `0` if there was no response
      * @notes ` -> ` starts the reply for a success. A reply can also be given for a status code (` 404-> `), several (` 401,403-> `), a class (` 5xx-> `), no response (` 0-> `), or any other failure (` !-> `). The most specific one is used. An arrow with nothing after it outputs nothing
      * @notes without a matching reply, a success outputs the response text and a failure outputs an error message
-     * @notes `$1`-`$9` are replaced with the arguments of the command, encoded for the part of the request they are placed in. If the command was not given one of them, the tag outputs an error message and no request is sent
+     * @notes `$1`-`$9` are replaced with the arguments of the command, encoded for the part of the request they are placed in. If the command was not given one of them, the tag outputs an error message and no request is sent. A `$` followed by a single digit is always an argument, so write a price such as `$5` as `5 dollars`
      * @notes a part of the url in square brackets that contains `$1`-`$9`, such as `[/$2]`, is only sent if every argument inside it was given. Those arguments are optional in the rest of the tag as well, and are left blank when missing
      * @notes `$secret.name` is replaced with an API secret saved in the panel. It can be used in the url, a header, or the body
      * @notes this tag can change data on the remote server. Anyone who can add or edit commands can use any saved API secret
      * @notes start the chat message with your own text, such as `-> Path: {path}`. A message that starts with `/` or `.` is treated as a Twitch command, which a field, an argument, or the response text could otherwise decide
-     * @notes parentheses inside the tag must be escaped as `\(` and `\)`. Other tags inside the tag run before it does, whichever reply is used
+     * @notes parentheses inside the tag must be escaped as `\(` and `\)`. Other tags inside the tag run before it does, whichever reply is used, and their text is read as part of the tag: a viewer's text from `(1)` could add `$secret.name` or a header, so use `$1`-`$9` for anything typed by a viewer
      * @example Caster: !addcom !joke (api https://not.real.com/joke)
      * User: !joke
      * Bot: These jokes are un-bear-able

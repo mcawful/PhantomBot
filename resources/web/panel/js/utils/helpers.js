@@ -1074,12 +1074,13 @@ $(function () {
                     // Append input box for the secret name.
                     .append(helpers.getInputGroup('secret-name', 'text', 'Name', 'shop', '', 'Name of the secret. Letters, numbers, and underscores only.'))
                     // Append input box for the secret value.
-                    .append(helpers.getInputGroup('secret-value', 'text', 'Value', '', '', 'Value of the secret.')), function () {
+                    .append(helpers.getInputGroup('secret-value', 'password', 'Value', '', '', 'Value of the secret.')), function () {
                 let secretName = $('#secret-name'),
                         secretValue = $('#secret-value');
 
                 // The (api) tag looks up secrets by their lowercase name.
                 secretName.val(secretName.val().trim().toLowerCase());
+                secretValue.val(secretValue.val().trim());
 
                 // Handle each input to make sure they have a value.
                 switch (false) {

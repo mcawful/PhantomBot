@@ -54,7 +54,7 @@ Only the URL is required. The parts must be in this order.
 |------|-------------|
 | `METHOD` | `GET`, `POST`, `PUT`, `PATCH`, or `DELETE`. `GET` is used if it is left out |
 | `url` | The address to send the request to. It must start with `http://` or `https://` and cannot contain spaces |
-| `[Header: value]` | A request header. Any number of headers can be added, directly after the URL |
+| `[Header: value]` | A request header. Any number of headers can be added, directly after the URL. A header value cannot contain `]` |
 | `body` | The data to send. Everything between the URL or headers and the first arrow is sent exactly as typed |
 | `-> reply` | What to say in chat. See [Replies](#replies) |
 
@@ -77,6 +77,8 @@ With a reply, the tag outputs the reply. These are replaced inside it
 | `$1` to `$9` | The arguments of the command |
 
 Braces always mean a field of the response. This is the opposite of `(customapijson)`, where braces mean plain text.
+
+If a reply reads a field and a successful response is not JSON, the request counts as a failure: the ` !-> ` reply is used, or the error message if there is none.
 
 **IMPORTANT:** Start the chat message with your own text, such as `-> Path: {path}` instead of `-> {path}`, or `Joke: (api https://example.com/joke)` instead of `(api https://example.com/joke)`. The bot treats a chat message that starts with `/` or `.` as a Twitch command. An unknown command is not shown in chat, and a known one, such as `/timeout` or `/ban`, is carried out by the bot. If the message starts with a field, an argument, or the text of the response, the API or a viewer decides how it starts.
 
@@ -187,6 +189,8 @@ To use a secret, write `$secret.` followed by its name in the URL, a header, or 
 ```
 
 Secrets are encoded the same way as arguments. They are never replaced in a reply.
+
+Because a secret is encoded, a `/` in a secret placed in the URL is sent as `%2F`. If a URL needs a `/` between two private values, such as the id and token of a webhook, save them as two secrets.
 
 **WARNING:** Anyone who can add or edit commands, keywords, or other responses that use command tags can use any saved secret, including in a request to a server of their own. Only give that access to people you trust with your secrets.
 
