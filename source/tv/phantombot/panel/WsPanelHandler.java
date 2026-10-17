@@ -841,7 +841,7 @@ public class WsPanelHandler implements WsFrameHandler {
             return;
         }
 
-        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equals(table))) {
+        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equalsIgnoreCase(table))) {
             return;
         }
 
@@ -872,7 +872,7 @@ public class WsPanelHandler implements WsFrameHandler {
             return;
         }
 
-        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equals(table))) {
+        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equalsIgnoreCase(table))) {
             return;
         }
 
@@ -927,7 +927,7 @@ public class WsPanelHandler implements WsFrameHandler {
                     continue;
                 }
 
-                if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equals(table))) {
+                if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equalsIgnoreCase(table))) {
                     continue;
                 }
 
@@ -964,7 +964,7 @@ public class WsPanelHandler implements WsFrameHandler {
             return;
         }
 
-        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equals(table))) {
+        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equalsIgnoreCase(table))) {
             return;
         }
 
@@ -1004,7 +1004,7 @@ public class WsPanelHandler implements WsFrameHandler {
             return;
         }
 
-        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equals(table))) {
+        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equalsIgnoreCase(table))) {
             return;
         }
 
@@ -1049,7 +1049,7 @@ public class WsPanelHandler implements WsFrameHandler {
             return;
         }
 
-        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equals(table))) {
+        if (Arrays.stream(BLOCKED_DB_QUERY_TABLES).anyMatch(t -> t.equalsIgnoreCase(table))) {
             return;
         }
 
